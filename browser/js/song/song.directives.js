@@ -8,19 +8,13 @@ juke.directive('songList', function () {
       `<table class='table'>
       <thead>
         <tr>
-          <th></th>
           <th>Name</th>
           <th>Artists</th>
           <th>Genres</th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="song in songs" ng-class="{active: song === getCurrentSong() }">
-          <td>
-            <button class="btn btn-default btn-xs" ng-click="toggle(song)">
-              <span class="glyphicon" ng-class="{ 'glyphicon-pause': isPlaying(song), 'glyphicon-play': !isPlaying(song) }"></span>
-            </button>
-          </td>
+        <tr double-click="toggle(song)" ng-repeat="song in songs" ng-class="{active: song === getCurrentSong() }">
           <td>{{ song.name }}</td>
           <td><span ng-repeat="artist in song.artists">{{ artist.name }}{{ $last ? '' : ', ' }}</span></td>
           <td>{{ song.genres.join(', ') }}</td>
@@ -29,3 +23,7 @@ juke.directive('songList', function () {
     </table>`
   };
 });
+
+  // <button class="btn btn-default btn-xs" ng-click="toggle(song)">
+  //             <span class="glyphicon" ng-class="{ 'glyphicon-pause': isPlaying(song), 'glyphicon-play': !isPlaying(song) }"></span>
+  //           </button>
