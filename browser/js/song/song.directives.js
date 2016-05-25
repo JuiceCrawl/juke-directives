@@ -23,6 +23,7 @@ juke.directive('songList', function (PlayerFactory) {
     </table>`,
   link: function(s,e,a){
     s.toggle = function (song) {
+      console.log(PlayerFactory.getCurrentSong())
       if (song !== PlayerFactory.getCurrentSong()) {
         PlayerFactory.start(song, s.songs);
       } else if ( PlayerFactory.isPlaying() ) {

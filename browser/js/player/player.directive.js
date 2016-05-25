@@ -5,8 +5,8 @@ juke.directive('doubleClick', function ($parse) {
       doubleClick: '&'
     },
     link: function (scope, element, attr) {
-      element.on('dblclick', function (song) {
-        scope.doubleClick(scope);
+      element.on('dblclick', function (event) {
+        scope.doubleClick();
       });
     }
   };
