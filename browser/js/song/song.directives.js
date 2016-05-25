@@ -1,4 +1,4 @@
-juke.directive('songList', function () {
+juke.directive('songList', function (PlayerFactory) {
   return {
       restrict:'E',
       scope: {
@@ -20,7 +20,26 @@ juke.directive('songList', function () {
           <td>{{ song.genres.join(', ') }}</td>
         </tr>
       </tbody>
-    </table>`
+    </table>`,
+  link: function(s,e,a){
+    s.toggle = function (song) {
+      if (song !== PlayerFactory.getCurrentSong()) {
+        PlayerFactory.start(song, s.songs);
+      } else if ( PlayerFactory.isPlaying() ) {
+        PlayerFactory.pause();
+      } else {
+        PlayerFactory.resume();
+      }
+    };
+
+    s.getCurrentSong = function () {
+      return PlayerFactory.getCurrentSong();
+    };
+
+    s.isPlaying = function (song) {
+      return PlayerFactory.isPlaying() && PlayerFactory.getCurrentSong() === song;
+      };
+    }
   };
 });
 
